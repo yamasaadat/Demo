@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  ul.nav.nav-pills.nav-fill
+    li.nav-item
+      a.nav-link.active(href="#")
+      form(method='POST' action='/users/login')
+        div.form-group
+          label(for='name') Name:
+          input#name.form-control(type='text', placeholder='Name' name='name')
+          label(for='pw') Password:
+          input#pw.form-control(type='password' name='password')
+        button.btn.btn-primary(type='submit') Login
+    li.nav-item
+      a.nav-link.active
+      form(method='POST' action='/users/signup')
+        div.form-group
+          label(for='name') Name:
+          input#name.form-control(type='text', placeholder='Name' name='name')
+        div.form-group
+          label(for='city') City:
+          input#email.form-control(type='text', placeholder='Toronto' name='city')
+        div.form-group
+          label(for='pw') Password:
+          input#pw.form-control(type='password' name='password')
+        div.form-group
+          label(for='pw2') Confirm Password:
+          input#pw2.form-control(type='password' name='confirmPassword')
+        button.btn.btn-primary(type='submit') Sign up
+    li.nav-item
+      a.nav-link.active
+      form(method='GET' action='/users/checkID')
+        div.form-group
+          label(for='uuid') User ID:
+          input#uuid(type='text' name='uuid')
+        button.btn.btn-primary(type='submit') Search
+
+  p
+    form(method='POST' action='/upload/fileUpload')
+      div.form-group
+        label(for='upload') Upload File:
+        input#upload(type="file" name='upload')
+      button.btn.btn-primary(type='submit') Upload!
+
+//  include coindesk.jade
+
+//  include coinbase.jade
