@@ -4,5 +4,5 @@ log/**
 bin/**
 
 # Files
-*.db
+*.db*
 trend_app_protect.json
