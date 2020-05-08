@@ -39,11 +39,25 @@ block content
         button.btn.btn-primary(type='submit') Search
 
   p
-    form(method='POST' action='/upload/fileUpload')
+    form(method='POST' action='/upload/fileUploadToServer')
       div.form-group
-        label(for='upload') Upload File:
+        label(for='upload') Upload to Server:
         input#upload(type="file" name='upload')
-      button.btn.btn-primary(type='submit') Upload!
+      button.btn.btn-primary(type='submit') Upload to Server!
+
+  p
+    form(method='POST' action='/upload/fileUploadToS3')
+      div.form-group
+        label(for='upload') Upload to S3:
+        input#upload(type="file" name='upload')
+      button.btn.btn-primary(type='submit') Upload to S3!
+
+  //- p
+  //-   form(method='POST' action='/upload/fileUploadToAzBlob')
+  //-     div.form-group
+  //-       label(for='upload') Upload to Azure:
+  //-       input#upload(type="file" name='upload')
+  //-     button.btn.btn-primary(type='submit') Upload to Azure!
 
 //  include coindesk.jade
 
