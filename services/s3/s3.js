@@ -8,7 +8,7 @@ exports.uploadFile = (fileName) => {
 
     // Setting up S3 upload parameters
     const params = {
-        Bucket: 'BUCKET_NAME',
+	Bucket: 'arn:aws:s3:us-east-2:666402644145:accesspoint/cloudone-accesspoint',
         Key: fileName,
         Body: fileContent
     };
