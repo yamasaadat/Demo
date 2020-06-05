@@ -39,7 +39,7 @@ block content
         button.btn.btn-primary(type='submit') Search
 
   p
-    form(method='POST' action='/upload/fileUploadToServer')
+    form(method='POST' action='/upload/fileUploadToServer' enctype="multipart/form-data")
       div.form-group
         label(for='upload') Upload to Server:
         input#upload(type="file" name='upload')
