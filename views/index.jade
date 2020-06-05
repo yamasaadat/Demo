@@ -1,56 +1,69 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h3= title
+  h5.mt2 Welcome to this mock demo application!
 
-  ul.nav.nav-pills.nav-fill
-    li.nav-item
-      a.nav-link.active(href="#")
-      form(method='POST' action='/users/login')
-        div.form-group
-          label(for='name') Name:
-          input#name.form-control(type='text', placeholder='Name' name='name')
-          label(for='pw') Password:
-          input#pw.form-control(type='password' name='password')
-        button.btn.btn-primary(type='submit') Login
-    li.nav-item
-      a.nav-link.active
-      form(method='POST' action='/users/signup')
-        div.form-group
-          label(for='name') Name:
-          input#name.form-control(type='text', placeholder='Name' name='name')
-        div.form-group
-          label(for='city') City:
-          input#email.form-control(type='text', placeholder='Toronto' name='city')
-        div.form-group
-          label(for='pw') Password:
-          input#pw.form-control(type='password' name='password')
-        div.form-group
-          label(for='pw2') Confirm Password:
-          input#pw2.form-control(type='password' name='confirmPassword')
-        button.btn.btn-primary(type='submit') Sign up
-    li.nav-item
-      a.nav-link.active
-      form(method='GET' action='/users/checkID')
-        div.form-group
-          label(for='uuid') User ID:
-          input#uuid(type='text' name='uuid')
-        button.btn.btn-primary(type='submit') Search
-
-  p
-    form(method='POST' action='/upload/fileUploadToServer' enctype="multipart/form-data")
-      div.form-group
-        label(for='upload') Upload to Server:
-        input#upload(type="file" name='upload')
-      button.btn.btn-primary(type='submit') Upload to Server!
-
-  p
-    form(method='POST' action='/upload/fileUploadToS3')
-      div.form-group
-        label(for='upload') Upload to S3:
-        input#upload(type="file" name='upload')
-      button.btn.btn-primary(type='submit') Upload to S3!
+  div.container.h35r.mt3
+    div.col-xs-12
+      nav 
+        div#nav-tab.nav.nav-tabs.nav-fill(role=tablist)
+          a#tab-login.nav-item.nav-link.active(role="tab" data-toggle="tab" href="#nav-login") Login
+          a#tab-signup.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-signup") Sign Up         
+          a#tab-search.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-search") Search        
+          
+      div#nav-tabContent.tab-content
+        div#nav-login.tab-pane.fade.show.active(role="tabpanel")
+          form(method='POST' action='/users/login')
+            div.form-group
+              label(for='login-name') Name:
+              input#login-name.form-control(type='text', placeholder='Name' name='name')
+              label(for='login-pw') Password:
+              input#login-pw.form-control(type='password' name='password')
+            button.btn.btn-primary(type='submit') Login
+        div#nav-signup.tab-pane.fade(role="tabpanel")
+          form(method='POST' action='/users/signup')
+            div.form-group
+              label(for='signup-name') Name:
+              input#signup-name.form-control(type='text', placeholder='Name' name='name')
+            div.form-group
+              label(for='city') City:
+              input#email.form-control(type='text', placeholder='Toronto' name='city')
+            div.form-group
+              label(for='signup-pw') Password:
+              input#signup-pw.form-control(type='password' name='password')
+            div.form-group
+              label(for='singup-pw2') Confirm Password:
+              input#signup-pw2.form-control(type='password' name='confirmPassword')
+            button.btn.btn-primary(type='submit') Sign up
+        div#nav-search.tab-pane.fade(role="tabpanel")
+          form(method='GET' action='/users/checkID')
+            div.form-group
+              label(for='uuid') User ID:
+              input#uuid.form-control(type='text' name='uuid')
+            button.btn.btn-primary(type='submit') Search
+    
+  div.container
+    div.row
+      div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
+        p.section-title Web Server
+        form(method='POST' action='/upload/fileUploadToServer' enctype="multipart/form-data")
+          div.input-group
+            div.custom-file
+              label.custom-file-label(for='file-upload') Upload file
+              input#file-upload.custom-file-input(type="file" name='upload')
+            div.input-group-append
+              button.btn.btn-primary(type='submit') Upload to Server
+    
+      div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
+        p.section-title Amazon S3 Bucket
+        form(method='POST' action='/upload/fileUploadToS3')
+          div.input-group
+            div.custom-file
+              label.custom-file-label(for='s3-upload') Upload file
+              input#s3-upload.custom-file-input(type="file" name='upload')
+            div.input-group-append
+              button.btn.btn-primary(type='submit') Upload to S3
 
   //- p
   //-   form(method='POST' action='/upload/fileUploadToAzBlob')
