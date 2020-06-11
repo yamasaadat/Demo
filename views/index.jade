@@ -72,6 +72,23 @@ block content
   //-       input#upload(type="file" name='upload')
   //-     button.btn.btn-primary(type='submit') Upload to Azure!
 
+  h1 My Photo Albums App
+
+  div#app
+
+
+  script(src='https://sdk.amazonaws.com/js/aws-sdk-2.693.0.js')
+
+  script(src='/javascripts/s3-upload.js')
+
+  script.
+      function getHtml(template) {
+          return template.join('\n');
+      }
+      listAlbums('cloudonedemo');  
+
 //  include coindesk.jade
 
 //  include coinbase.jade
+
+// include s3-upload.jade
