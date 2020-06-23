@@ -57,13 +57,34 @@ block content
     
       div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
         p.section-title Amazon S3 Bucket
-        form
-          div.input-group
-            div.custom-file
-              label.custom-file-label(for='s3-upload') Upload file
-              input#s3-upload.custom-file-input(type="file" name='upload')
-            div.input-group-append
-              button.btn.btn-primary(onclick="uploadFileToS3()") Upload to S3
+        //- form(method='PUT' action='/upload/fileUploadToS3' enctype="multipart/form-data")
+        div.input-group
+          div.custom-file
+            label.custom-file-label(for='s3Upload') Upload file
+            input#s3Upload.custom-file-input(type="file" name='upload')
+          div.input-group-append
+            button.btn.btn-primary(onclick="uploadFile()") Upload to S3
+
+          //- function uploadFileToS3() {
+          //-   console.dir(document.getElementById('s3-upload'));
+          //-   var file = document.getElementById('s3-upload').files[0];
+          //-   //- alert("Hello");
+          //-   console.log(file);
+          //-   // Read content from the file
+          //-   if (file) {
+          //-       var reader = new FileReader();
+          //-       reader.readAsText(file, "UTF-8");
+          //-       reader.onload = function (evt) {
+          //-           console.log(evt.target.result);
+          //-           fileContent = evt.target.result;
+
+          //-       }
+          //-       reader.onerror = function (evt) {
+          //-           console.log("error reading file");
+          //-           reject(false);
+          //-       }
+          //-   }
+          //- }
 
   //- p
   //-   form(method='POST' action='/upload/fileUploadToAzBlob')
@@ -72,20 +93,57 @@ block content
   //-       input#upload(type="file" name='upload')
   //-     button.btn.btn-primary(type='submit') Upload to Azure!
 
-  h1 My Photo Albums App
-
-  div#app
-
-
   script(src='https://sdk.amazonaws.com/js/aws-sdk-2.693.0.js')
 
-  script(src='/javascripts/s3-upload.js')
-
   script.
-      function getHtml(template) {
-          return template.join('\n');
+      var bucketName = "cloudonedemo";
+      var bucketRegion = "us-east-2";
+      var IdentityPoolId = "us-east-2:adc9af1b-658d-4924-83e9-7698d8c58be5";
+
+      AWS.config.region = bucketRegion
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: IdentityPoolId
+      })
+
+      var s3 = new AWS.S3({
+          apiVersion: "2006-03-01",
+          params: { Bucket: bucketName }
+      });
+
+      function uploadFile() {
+        let folderName = "uploads";
+        console.log(folderName);
+        console.log(document.getElementById("s3Upload"));
+        var files = document.getElementById("s3Upload").files;
+        if (!files.length) {
+            return alert("Please choose a file to upload first.");
+        }
+        var file = files[0];
+        var fileName = file.name;
+        var folderFilesKey = encodeURIComponent(folderName) + "/";
+
+        var fileKey = folderFilesKey + fileName;
+
+        // Use S3 ManagedUpload class as it supports multipart uploads
+        var upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: folderBucketName,
+                Key: fileKey,
+                Body: file
+            }
+        });
+
+        var promise = upload.promise();
+
+        promise.then(
+            function (data) {
+                alert("Successfully uploaded file.");
+            },
+            function (err) {
+                return alert("There was an error uploading your file: ", err.message);
+            }
+        );
       }
-      listAlbums('cloudonedemo');  
 
 //  include coindesk.jade
 
