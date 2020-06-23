@@ -6,8 +6,8 @@ exports.uploadFile = (fileName) => {
     
     return new Promise(function (resolve, reject) {
 	console.log(fileName);
-    	// Read content from the file
-    	const fileContent = fs.readFileSync(fileName);
+    // Read content from the file
+    const fileContent = fs.readFileSync(fileName);
 	console.log(fileContent);
 
     	// Setting up S3 upload parameters

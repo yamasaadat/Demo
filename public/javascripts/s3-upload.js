@@ -11,6 +11,7 @@ var albumBucketName = "cloudonedemo";
             apiVersion: "2006-03-01",
             params: { Bucket: albumBucketName }
         });
+
         // snippet-end:[s3.JavaScript.photoAlbumExample.config]
 
         // snippet-start:[s3.JavaScript.photoAlbumExample.listAlbums]
@@ -141,7 +142,9 @@ var albumBucketName = "cloudonedemo";
 
         // snippet-start:[s3.JavaScript.photoAlbumExample.addPhoto]
         function addPhoto(albumName) {
-            var files = document.getElementById("photoupload").files;
+            console.log(albumName);
+            console.log(document.getElementById("s3-upload"));
+            var files = document.getElementById("s3-upload").files;
             if (!files.length) {
                 return alert("Please choose a file to upload first.");
             }
@@ -156,8 +159,7 @@ var albumBucketName = "cloudonedemo";
                 params: {
                     Bucket: albumBucketName,
                     Key: photoKey,
-                    Body: file,
-                    ACL: "public-read"
+                    Body: file
                 }
             });
 
