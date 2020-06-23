@@ -7,3 +7,4 @@ uploads/**
 # Files
 *.db*
 trend_app_protect.json
+nohup.out
