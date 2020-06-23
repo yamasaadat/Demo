@@ -5,13 +5,14 @@ var s3 = new aws.S3({apiVersion: '2006-03-01'});
 exports.uploadFile = (fileName) => {
     
     return new Promise(function (resolve, reject) {
-
+	console.log(fileName);
     	// Read content from the file
     	const fileContent = fs.readFileSync(fileName);
+	console.log(fileContent);
 
     	// Setting up S3 upload parameters
     	const params = {
-		Bucket: 'arn:aws:s3:us-east-2:666402644145:accesspoint/cloudone-accesspoint',
+		Bucket: 'cloudonedemo',
         	Key: fileName,
         	Body: fileContent
     	};
@@ -22,7 +23,7 @@ exports.uploadFile = (fileName) => {
                 console.error(err);
                 reject(false);
             } else {
-                // console.log(`File uploaded successfully. ${data.Location}`);
+                console.log(`File uploaded successfully. ${data.Location}`);
                 resolve(true);
             }
         });
