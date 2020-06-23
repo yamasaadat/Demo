@@ -57,13 +57,13 @@ block content
     
       div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
         p.section-title Amazon S3 Bucket
-        form(method='POST' action='/upload/fileUploadToS3')
+        form
           div.input-group
             div.custom-file
               label.custom-file-label(for='s3-upload') Upload file
               input#s3-upload.custom-file-input(type="file" name='upload')
             div.input-group-append
-              button.btn.btn-primary(type='submit') Upload to S3
+              button.btn.btn-primary(onclick="uploadFileToS3()") Upload to S3
 
   //- p
   //-   form(method='POST' action='/upload/fileUploadToAzBlob')
