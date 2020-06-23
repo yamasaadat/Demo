@@ -127,7 +127,7 @@ block content
         // Use S3 ManagedUpload class as it supports multipart uploads
         var upload = new AWS.S3.ManagedUpload({
             params: {
-                Bucket: folderBucketName,
+                Bucket: bucketName,
                 Key: fileKey,
                 Body: file
             }
