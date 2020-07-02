@@ -20,6 +20,6 @@
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {
-    "trend_app_protect": "^4.1.4"
+    "trend_app_protect": "^4.1.6"
   }
 }
