@@ -3,8 +3,9 @@ node_modules/**
 log/**
 logs/**
 uploads/**
+!uploads/.keep
 
 # Files
 *.db*
-trend_app_protect.json
+trend_app_protect.json*
 nohup.out
