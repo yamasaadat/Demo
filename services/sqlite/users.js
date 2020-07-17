@@ -78,7 +78,7 @@ exports.checkUser = (user_name, user_pass) => {
     // return login;
 };
 
-exports.checkID = (user_uuid) => {
+exports.checkId = (user_uuid) => {
     var user_name = 'nobody';
     db.serialize(function () {
         db.all("SELECT user_name FROM tblUsers WHERE user_uuid = ?;", user_uuid, (err, rows) => {

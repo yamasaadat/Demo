@@ -6,9 +6,13 @@ var logger = require('morgan');
 const fs = require('fs')
 
 var sql = require('./services/sqlite/sqlite.js');
+var mysql = require('./services/mysql/mysql.js');
 var utils = require('./utils/utils.js')
 
 var users = require('./services/sqlite/users.js')
+
+const config = require('./config.js');
+var sqlFlag = config.sqlFlag();
 
 require("trend_app_protect");
 
@@ -61,7 +65,11 @@ var checkDBExists = () => {
   }
 }
 
-checkDBExists();
+if (sqlFlag == 'mysql') {
+  mysql.initDB();
+} else {
+  checkDBExists();
+};
 
 // users.putUser(1588351811, 'george', 'password', 'toronto');
 // users.putUser(1588351812, 'george', 'pasword', 'toronto');
