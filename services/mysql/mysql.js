@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const { response } = require('express');
 
 // const connection = mysql.createConnection({
 //     host : 'localhost',
@@ -29,9 +30,9 @@ exports.initDB = () => {
 exports.getUser = (id) => {
     // connection.connect();
 
-    pool.query('SELECT user_name FROM tbl_user_entries WHERE id = "' + id + '";', function(error, results, fields) {
+    pool.query('SELECT user_name FROM tbl_user_entries WHERE id = ' + id + ';', function(error, results, fields) {
         if (error) throw error;
-        console.log('SQLResult: ', results[0].user_name);
+        console.log('SQLResult: ', results);
     });
 
     // connection.end();
@@ -42,7 +43,7 @@ exports.getAllUsers = () => {
 
     pool.query('SELECT user_name FROM tbl_user_entries;', function(error, results, fields) {
         if (error) throw error;
-        console.log('SQLResult: ', results[0].user_name);
+        console.log('SQLResult: ', results);
     });
 
     // connection.end();
@@ -51,7 +52,7 @@ exports.getAllUsers = () => {
 exports.postUserEntry = (user_entries, entry_timestamp) => {
     // connection.connect();
 
-    pool.query('INSERT INTO tbl_user_entries(user_entries, entry_timestamp) VALUES ("' + user_entries + '", "' + entry_timestamp + '");', function(error, results, fields) {
+    pool.query('INSERT INTO tbl_user_entries(user_entries, entry_timestamp) VALUES (' + user_entries + ', "' + entry_timestamp + '");', function(error, results, fields) {
         if (error) throw error;
         console.log('SQLResult: ', results);
     });
@@ -62,7 +63,7 @@ exports.postUserEntry = (user_entries, entry_timestamp) => {
 exports.postUser = (user_name, user_pass) => {
     // connection.connect();
 
-    pool.query('INSERT INTO tbl_user_entries(user_name, user_pass) VALUES ("' + user_name + '",  PASSWORD("' + user_pass + '"));', function(error, results, fields) {
+    pool.query('INSERT INTO tbl_user_entries(user_name, user_pass) VALUES (' + user_name + ',  PASSWORD("' + user_pass + '"));', function(error, results, fields) {
         if (error) throw error;
         console.log('SQLResult: ', results);
     });
@@ -72,10 +73,10 @@ exports.postUser = (user_name, user_pass) => {
 
 exports.checkUser = (user_name, user_pass) => {
     // connection.connect();
-
-    pool.query('SELECT user_name FROM tbl_user_entries WHERE user_name = "' + user_name + '" AND user_pass = PASSWORD("' + user_pass + '");', function(error, results, fields) {
+    
+    pool.query('SELECT user_name FROM tbl_user_entries WHERE user_name = ' + user_name + ' AND user_pass = PASSWORD("' + user_pass + '");', function(error, results) {
         if (error) throw error;
-        console.log('SQLResult: ', results[0].user_name);
+        console.log('SQLResult: ', results);
     });
 
     // connection.end();
@@ -84,9 +85,9 @@ exports.checkUser = (user_name, user_pass) => {
 exports.checkId = (id) => {
     // connection.connect();
 
-    pool.query('SELECT user_name FROM tbl_user_entries WHERE id = "' + id + '";', function(error, results, fields) {
+    pool.query('SELECT user_name FROM tbl_user_entries WHERE id = ' + id + ';', function(error, results, fields) {
         if (error) throw error;
-        console.log('SQLResult: ', results[0].user_name);
+        console.log('SQLResult: ', results);
     });
 
     // connection.end();

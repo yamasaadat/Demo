@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   console.log(JSON.stringify(req.body));
   if (sqlFlag == 'mysql') {
+    // console.log(mysql.checkUser(req.body.name, req.body.password))
     if(mysql.checkUser(req.body.name, req.body.password)) {
       res.send('Logged in. Thank you.');
     };
