@@ -26,8 +26,7 @@ router.post('/signup', function(req, res, next) {
   res.send('Signed up. Thank you.');
 });
 
-router.get('/checkId', function(req, res, next) {
-  console.log("Test - " + mysql.checkId(req.query.uuid));
+router.get('/checkId', function(req, res, next) {  
   res.send('Hello ' + mysql.checkId(req.query.uuid));
 });
 
