@@ -4,6 +4,8 @@ log/**
 logs/**
 uploads/**
 !uploads/.keep
+downloads/**
+!downloads/.keep
 
 # Files
 *.db*
