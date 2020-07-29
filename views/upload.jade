@@ -1,0 +1,87 @@
+extends layout
+
+block content
+
+  div.container
+    div.row
+      div.inline
+        p.section-title Upload your documents
+        form(method='POST' action='/upload/fileUploadToServer' enctype="multipart/form-data")
+          div.input-group
+            div.custom-file
+              label.custom-file-label(for='file-upload') File Upload
+              input#file-upload.custom-file-input(type="file" name='upload')
+            div.input-group-append
+              button.btn.btn-primary(type='submit' onclick="uploadFile();") Upload
+
+        div.container.marginTop OR
+
+        div.input-group.marginTop
+          div.custom-file
+              label.custom-file-label(for='s3Upload') File Upload
+              input#s3Upload.custom-file-input(type="file" name='upload')
+          div.input-group-append
+              button.btn.btn-primary(onclick="uploadFile()") Upload to S3
+
+      //- div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
+      //-   p.section-title Amazon S3 Bucket
+      //-   form(method='PUT' action='/upload/fileUploadToS3' enctype="multipart/form-data")
+
+
+
+    //-   div.container
+    //-     form(method='GET' action='/upload/eicar.com' enctype="multipart/form-data")
+    //-         div.input-group-append
+    //-             button.btn.btn-primary(typ="submit") Get Eicar
+
+  script(src='https://sdk.amazonaws.com/js/aws-sdk-2.693.0.js')
+
+  script.
+      var bucketName = "globalcloudonedemo";
+      var bucketRegion = "us-east-1";
+      var IdentityPoolId = "us-east-1:e5756dab-32cd-497f-bdf9-dfeddd1aa32d";
+
+      AWS.config.region = bucketRegion
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: IdentityPoolId
+      })
+
+      var s3 = new AWS.S3({
+          apiVersion: "2006-03-01",
+          params: { Bucket: bucketName }
+      });
+
+      function uploadFile() {
+        let folderName = "uploads";
+        console.log(folderName);
+        console.log(document.getElementById("s3Upload"));
+        var files = document.getElementById("s3Upload").files;
+        if (!files.length) {
+            return alert("Please choose a file to upload first.");
+        }
+        var file = files[0];
+        var fileName = file.name;
+        var folderFilesKey = encodeURIComponent(folderName) + "/";
+
+        var fileKey = folderFilesKey + fileName;
+
+        // Use S3 ManagedUpload class as it supports multipart uploads
+        var upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: bucketName,
+                Key: fileKey,
+                Body: file
+            }
+        });
+
+        var promise = upload.promise();
+
+        promise.then(
+            function (data) {
+                alert("Successfully uploaded file.");
+            },
+            function (err) {
+                return alert("There was an error uploading your file: ", err.message);
+            }
+        );
+      }

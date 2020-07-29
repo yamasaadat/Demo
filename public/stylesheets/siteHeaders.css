@@ -1,0 +1,59 @@
+nav ul li a {
+    color: blue;
+    text-decoration-line: none;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    text-align: center;
+}
+
+/* .siteHeader:after { 
+    font-family: 'webflow-icons' !important;
+    content: "\e603";
+    color: black;
+} */
+
+.siteHeader {
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+}
+
+nav {
+    text-align: center;
+}
+nav ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;    
+    zoom:1;
+    *display: inline;
+}
+nav li {
+    float: left;
+    padding: 2rem 2rem;
+    /* border: 1px solid black; */
+    list-style: none;
+}
+
+nav ul li:first-child {
+    padding: 0;
+    margin: 0;
+}
+
+.linkButton {
+    margin: 1rem 0.25rem;
+    padding: 1rem;
+    border: 0;
+    border-radius: 0.5rem;
+}
+
+.linkButton a {
+    text-decoration-line: none;
+    color: white;
+}
+
+.linkButton:first-child {
+    margin-left: 3rem;
+}

@@ -1,0 +1,110 @@
+extends layout
+
+block content
+  h3= title
+  h5.mt2 Welcome to this mock demo application!
+
+  div.container.h35r.mt3
+    div.col-xs-12
+      nav 
+        div#nav-tab.nav.nav-tabs.nav-fill(role=tablist)
+          a#tab-login.nav-item.nav-link.active(role="tab" data-toggle="tab" href="#nav-login") Login
+          a#tab-signup.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-signup") Sign Up         
+          a#tab-search.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-search") Search        
+          
+      div#nav-tabContent.tab-content
+        div#nav-login.tab-pane.fade.show.active(role="tabpanel")
+          //- form
+            //- (method='POST' action='/users/login')
+          div.form-group
+            label(for='login-name') Name:
+            input#login-name.form-control(type='text', placeholder='Name' name='name')
+            label(for='login-pw') Password:
+            input#login-pw.form-control(type='password' name='password')
+          a(href="/upload")
+            button.btn.btn-primary(type='submit') Login
+
+        div#nav-signup.tab-pane.fade(role="tabpanel")        
+          //- form
+            //- (method='POST' action='/users/signup')
+          div.form-group
+            label(for='signup-name') Name:
+            input#signup-name.form-control(type='text', placeholder='Name' name='name')
+          div.form-group
+            label(for='city') City:
+            input#email.form-control(type='text', placeholder='Toronto' name='city')
+          div.form-group
+            label(for='signup-pw') Password:
+            input#signup-pw.form-control(type='password' name='password')
+          div.form-group
+            label(for='singup-pw2') Confirm Password:
+            input#signup-pw2.form-control(type='password' name='confirmPassword')
+          a(href="/upload")
+            button.btn.btn-primary(type='submit') Sign up
+
+        div#nav-search.tab-pane.fade(role="tabpanel")
+          //- form 
+            //- (method='GET' action='/users/checkId')
+          div.form-group
+            label(for='uuid') User ID:
+            input#uuid.form-control(type='text' name='uuid')
+          a(href="/upload")
+            button.btn.btn-primary(type='submit') Search
+
+    //- div.row
+    //-   form(method='GET' action='/upload/eicar.com' enctype="multipart/form-data")
+    //-     div.input-group
+    //-       div.input-group-append
+    //-         button.btn.btn-primary(typ="submit") Get Eicar
+    
+  //- div.container
+  //-   div.row
+  //-     div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
+  //-       p.section-title Web Server
+  //-       form(method='POST' action='/upload/fileUploadToServer' enctype="multipart/form-data")
+  //-         div.input-group
+  //-           div.custom-file
+  //-             label.custom-file-label(for='file-upload') Upload file
+  //-             input#file-upload.custom-file-input(type="file" name='upload')
+  //-           div.input-group-append
+  //-             button.btn.btn-primary(type='submit') Upload to Server
+    
+  //-     div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
+  //-       p.section-title Amazon S3 Bucket
+  //-       //- form(method='PUT' action='/upload/fileUploadToS3' enctype="multipart/form-data")
+  //-       div.input-group
+  //-         div.custom-file
+  //-           label.custom-file-label(for='s3Upload') Upload file
+  //-           input#s3Upload.custom-file-input(type="file" name='upload')
+  //-         div.input-group-append
+  //-           button.btn.btn-primary(onclick="uploadFile()") Upload to S3
+
+  //- function uploadFileToS3() {
+  //-   console.dir(document.getElementById('s3-upload'));
+  //-   var file = document.getElementById('s3-upload').files[0];
+  //-   //- alert("Hello");
+  //-   console.log(file);
+  //-   // Read content from the file
+  //-   if (file) {
+  //-       var reader = new FileReader();
+  //-       reader.readAsText(file, "UTF-8");
+  //-       reader.onload = function (evt) {
+  //-           console.log(evt.target.result);
+  //-           fileContent = evt.target.result;
+
+  //-       }
+  //-       reader.onerror = function (evt) {
+  //-           console.log("error reading file");
+  //-           reject(false);
+  //-       }
+  //-   }
+  //- }
+
+  //- p
+  //-   form(method='POST' action='/upload/fileUploadToAzBlob')
+  //-     div.form-group
+  //-       label(for='upload') Upload to Azure:
+  //-       input#upload(type="file" name='upload')
+  //-     button.btn.btn-primary(type='submit') Upload to Azure!
+
+  

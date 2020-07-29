@@ -1,0 +1,8 @@
+.alert {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: medium;
+    color: white;
+    background: #771bd5;
+}

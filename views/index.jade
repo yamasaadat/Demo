@@ -1,146 +1,23 @@
 extends layout
 
 block content
-  h3= title
-  h5.mt2 Welcome to this mock demo application!
-
-  div.container.h35r.mt3
-    div.col-xs-12
-      nav 
-        div#nav-tab.nav.nav-tabs.nav-fill(role=tablist)
-          a#tab-login.nav-item.nav-link.active(role="tab" data-toggle="tab" href="#nav-login") Login
-          a#tab-signup.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-signup") Sign Up         
-          a#tab-search.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-search") Search        
-          
-      div#nav-tabContent.tab-content
-        div#nav-login.tab-pane.fade.show.active(role="tabpanel")
-          form(method='POST' action='/users/login')
-            div.form-group
-              label(for='login-name') Name:
-              input#login-name.form-control(type='text', placeholder='Name' name='name')
-              label(for='login-pw') Password:
-              input#login-pw.form-control(type='password' name='password')
-            button.btn.btn-primary(type='submit') Login
-        div#nav-signup.tab-pane.fade(role="tabpanel")
-          form(method='POST' action='/users/signup')
-            div.form-group
-              label(for='signup-name') Name:
-              input#signup-name.form-control(type='text', placeholder='Name' name='name')
-            div.form-group
-              label(for='city') City:
-              input#email.form-control(type='text', placeholder='Toronto' name='city')
-            div.form-group
-              label(for='signup-pw') Password:
-              input#signup-pw.form-control(type='password' name='password')
-            div.form-group
-              label(for='singup-pw2') Confirm Password:
-              input#signup-pw2.form-control(type='password' name='confirmPassword')
-            button.btn.btn-primary(type='submit') Sign up
-        div#nav-search.tab-pane.fade(role="tabpanel")
-          form(method='GET' action='/users/checkId')
-            div.form-group
-              label(for='uuid') User ID:
-              input#uuid.form-control(type='text' name='uuid')
-            button.btn.btn-primary(type='submit') Search
+    div.displayInline.col-sm-4.col-md-4.col-lg-4
+      span.displayInline.marginTop.marginBottom
+        span.siteGradient.alert.marginRight NEW
+        span We've Increased Our Security
+        span
+          img(src="/img/right_arrow_grey.svg")
+ 
+      div.frontpageBannerText.marginBottom Welcome to TM Health Care Center
     
-  div.container
-    div.row
-      div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
-        p.section-title Web Server
-        form(method='POST' action='/upload/fileUploadToServer' enctype="multipart/form-data")
-          div.input-group
-            div.custom-file
-              label.custom-file-label(for='file-upload') Upload file
-              input#file-upload.custom-file-input(type="file" name='upload')
-            div.input-group-append
-              button.btn.btn-primary(type='submit') Upload to Server
+      div.frontpageBannerDescription.marginBottom Due to Covid-19, Please refrain from coming in if you are feeling any Flu like symptoms.
     
-      div.col-lg-6.col-md-6.col-sm-6.col-xs-6.inline
-        p.section-title Amazon S3 Bucket
-        //- form(method='PUT' action='/upload/fileUploadToS3' enctype="multipart/form-data")
-        div.input-group
-          div.custom-file
-            label.custom-file-label(for='s3Upload') Upload file
-            input#s3Upload.custom-file-input(type="file" name='upload')
-          div.input-group-append
-            button.btn.btn-primary(onclick="uploadFile()") Upload to S3
+      a(href="/login")
+        button(type="button" class="siteGradient callToActionButton marginBottom" ) Please Login
 
-          //- function uploadFileToS3() {
-          //-   console.dir(document.getElementById('s3-upload'));
-          //-   var file = document.getElementById('s3-upload').files[0];
-          //-   //- alert("Hello");
-          //-   console.log(file);
-          //-   // Read content from the file
-          //-   if (file) {
-          //-       var reader = new FileReader();
-          //-       reader.readAsText(file, "UTF-8");
-          //-       reader.onload = function (evt) {
-          //-           console.log(evt.target.result);
-          //-           fileContent = evt.target.result;
+    div.displayInline.floatRight.allZero.col-sm-7.col-md-7.col-lg-7
+      //- div.bgGradientShape
+      //- span.frontpageBgParallelogram    
+      img(src="/img/hospital.jpg" alt="Cloud One Hospital" class="frontpageBannerImg")
 
-          //-       }
-          //-       reader.onerror = function (evt) {
-          //-           console.log("error reading file");
-          //-           reject(false);
-          //-       }
-          //-   }
-          //- }
 
-  //- p
-  //-   form(method='POST' action='/upload/fileUploadToAzBlob')
-  //-     div.form-group
-  //-       label(for='upload') Upload to Azure:
-  //-       input#upload(type="file" name='upload')
-  //-     button.btn.btn-primary(type='submit') Upload to Azure!
-
-  script(src='https://sdk.amazonaws.com/js/aws-sdk-2.693.0.js')
-
-  script.
-      var bucketName = "globalcloudonedemo";
-      var bucketRegion = "us-east-1";
-      var IdentityPoolId = "us-east-1:e5756dab-32cd-497f-bdf9-dfeddd1aa32d";
-
-      AWS.config.region = bucketRegion
-      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: IdentityPoolId
-      })
-
-      var s3 = new AWS.S3({
-          apiVersion: "2006-03-01",
-          params: { Bucket: bucketName }
-      });
-
-      function uploadFile() {
-        let folderName = "uploads";
-        console.log(folderName);
-        console.log(document.getElementById("s3Upload"));
-        var files = document.getElementById("s3Upload").files;
-        if (!files.length) {
-            return alert("Please choose a file to upload first.");
-        }
-        var file = files[0];
-        var fileName = file.name;
-        var folderFilesKey = encodeURIComponent(folderName) + "/";
-
-        var fileKey = folderFilesKey + fileName;
-
-        // Use S3 ManagedUpload class as it supports multipart uploads
-        var upload = new AWS.S3.ManagedUpload({
-            params: {
-                Bucket: bucketName,
-                Key: fileKey,
-                Body: file
-            }
-        });
-
-        var promise = upload.promise();
-
-        promise.then(
-            function (data) {
-                alert("Successfully uploaded file.");
-            },
-            function (err) {
-                return alert("There was an error uploading your file: ", err.message);
-            }
-        );
-      }
