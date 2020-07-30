@@ -56,7 +56,23 @@ block content
           params: { Bucket: bucketName }
       });
 
+
+
       function uploadFile() {
+
+        var params = {
+          Bucket: "examplebucket"
+        };
+        s3.createBucket(params, function(err, data) {
+          if (err) console.log(err, err.stack); // an error occurred
+          else     console.log(data);           // successful response
+          /*
+          data = {
+            Location: "/examplebucket"
+          }
+          */
+        });
+        
         let folderName = "uploads";
         console.log(folderName);
         console.log(document.getElementById("s3Upload"));
