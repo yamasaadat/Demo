@@ -18,6 +18,10 @@ router.get('/links', function(req, res, next) {
   res.render('links', { title: 'Trend Micro Cloud One - Application Security Demo' });
 });
 
+router.get('/welcome', function(req, res, next) {
+  res.render('welcome', { title: 'Trend Micro Cloud One - Application Security Demo' });
+});
+
 router.get('/upload', function(req, res, next) {
   res.render('upload', { title: 'Trend Micro Cloud One - Application Security Demo' });
 });

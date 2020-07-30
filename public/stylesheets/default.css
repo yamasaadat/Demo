@@ -1,10 +1,7 @@
 body {
     background-image: url('../img/background1.png');
     background-repeat: no-repeat;
-    max-width: 100%;
-    max-height: 10rem; 
     /* background-size: cover;   */
-    object-fit: cover;  
     background-color: white;
     color: blue;
     font-family: sans-serif;    
@@ -27,6 +24,14 @@ body {
 
 .marginTop {
     margin-top: 1rem;
+}
+
+.marginTop10 {
+    margin-top: 10rem;
+}
+
+.marginRight {
+    margin-right: 1rem;
 }
 
 .allZero {
