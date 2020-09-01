@@ -2,23 +2,25 @@ extends layout
 
 block content
 
-  div.container.h35r.mt3
-    div.col-xs-12
-      nav 
-        div#nav-tab.nav.nav-tabs.nav-fill(role=tablist)
-          a#tab-login.nav-item.nav-link.active(role="tab" data-toggle="tab" href="#nav-login") Login
-          //- a#tab-signup.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-signup") Sign Up         
-          //- a#tab-search.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-search") Search        
+  div.container-fluid.h35r.mt3
+    //- div.col-xs-12
+    //-   nav 
+    //-     div#nav-tab.nav.nav-tabs.nav-fill(role=tablist)
+    //-       a#tab-login.nav-item.nav-link.active(role="tab" data-toggle="tab" href="#nav-login") Login
+    //-       a#tab-signup.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-signup") Sign Up         
+    //-       a#tab-search.nav-item.nav-link(role="tab" data-toggle="tab" href="#nav-search") Search        
           
-      div#nav-tabContent.tab-content
-        div#nav-login.tab-pane.fade.show.active(role="tabpanel")
-          form(method='POST' action='/users/login')
-            div.form-group
-              label(for='login-name') Name:
-              input#login-name.form-control(type='text', placeholder='Name' name='name')
-              label(for='login-pw') Password:
-              input#login-pw.form-control(type='password' name='password')
-            button.btn.btn-primary.marginTop(type='submit') Login
+    //- div#nav-tabContent.tab-content
+    //- div#nav-login.tab-pane.fade.show.active(role="tabpanel")
+    div.col-lg-3.col-md-3.col-sm-5.col-xs-7     
+      p.section-title(style="font-size: 1.25rem;") Login      
+      form(method='POST' action='/users/login')
+        div.form-group
+          label(for='login-name') Name:
+          input#login-name.form-control(type='text', placeholder='Name' name='name')
+          label(for='login-pw') Password:
+          input#login-pw.form-control(type='password' name='password' placeholder='Password')
+        button.btn.btn-primary.marginTop(type='submit') Login
 
         //- div#nav-signup.tab-pane.fade(role="tabpanel")        
         //-   //- form

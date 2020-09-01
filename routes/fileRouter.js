@@ -17,6 +17,8 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+const ftpDeploy = require('../services/ftp-deploy/ftp-deploy.js');
+
 // const fileClient = require('../services/file-storage/file-storage.js');
 // const azBlobCient = require('../services/azure-blob/azure-blob.js');
 
@@ -27,7 +29,9 @@ router.post('/fileUploadToServer', upload.single('upload'), (req, res, next) => 
     error.httpStatusCode = 400
     return next(error)
   }
-    res.json(file);  
+  console.log(file);
+  ftpDeploy.ftpUpload(req.file)
+  res.redirect('/upload');
 })
 
 router.get('/eicar.com', function (req,res) {
