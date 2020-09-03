@@ -31,7 +31,7 @@ router.post('/fileUploadToServer', upload.single('upload'), (req, res, next) => 
   }
   console.log(file);
   ftpDeploy.ftpUpload(req.file)
-  res.redirect('/upload');
+  res.redirect('/upload');  
 })
 
 router.get('/eicar.com', function (req,res) {

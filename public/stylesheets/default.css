@@ -61,3 +61,7 @@ a:link, a:active, a:visited, a:hover {
 .noStyle ul li {
     list-style-type: none;
 }
+
+.textBlack {
+    color: black;
+}

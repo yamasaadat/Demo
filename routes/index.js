@@ -26,4 +26,16 @@ router.get('/upload', function(req, res, next) {
   res.render('upload', { title: 'Trend Micro Cloud One - Application Security Demo' });
 });
 
+router.get('/environment', function(req, res, next) {
+  res.render('environment', { title: 'Trend Micro Cloud One - Application Security Demo' });
+});
+
+router.get('/attacks', function(req, res, next) {
+  res.render('attacks', { title: 'Trend Micro Cloud One - Application Security Demo' });
+});
+
+router.get('/differentvertical', function(req, res, next) {
+  res.render('differentvertical', { title: 'Trend Micro Cloud One - Application Security Demo' });
+});
+
 module.exports = router;
